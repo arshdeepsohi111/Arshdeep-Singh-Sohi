@@ -1,114 +1,133 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
   <title>Assign2</title>
 
   <style>
-    body{
-      margin:20px;
-      background-image:url("ARSH.jpg");
-      background-size:cover;
-      background-repeat:no-repeat;
-      background-attachment:fixed;
-      font-family:Arial, sans-serif;
+    h1 { color: green; }
+
+    p {
+      background-color: lightblue;
+      font-family: Algerian, serif;
+      font-size: 45px;
+      padding: 8px;
+      margin: 10px 0;
     }
 
-    h1{ color:green; }
-
-    p{
-      background-color:lightblue;
-      font-family:Algerian, serif;
-      font-size:45px;
-      padding:8px;
+    #section1 {
+      background-image: url("ARSH.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      padding: 20px;
+      min-height: 500px;
     }
 
-    hr{
-      width:60%;
-      height:30px;
-      background-color:lightgreen;
-      border:none;
-      margin:20px 0;
+    #section2 {
+      background-image: url("SKYTRAIN.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      padding: 20px;
+      min-height: 500px;
     }
 
-    #section2{
-      background-image:url("SKYTRAIN.jpg");
-      background-size:cover;
-      background-repeat:no-repeat;
-      padding:15px;
+    hr {
+      width: 60%;
+      height: 30px;
+      background-color: lightgreen;
+      border: none;
+      margin: 20px 0;
     }
   </style>
+
+  <script>
+    function changeImage(imageName) {
+      document.getElementById("displayImage").src = imageName;
+    }
+
+    function calculateAverage() {
+      let num1 = parseInt(prompt("Enter first number (20 - 350):"));
+      let num2 = parseInt(prompt("Enter second number (20 - 350):"));
+
+      if (isNaN(num1) || isNaN(num2)) {
+        alert("Please enter valid numbers.");
+        return;
+      }
+
+      if (num1 < 20 || num1 > 350 || num2 < 20 || num2 > 350) {
+        alert("Numbers must be between 20 and 350.");
+        return;
+      }
+
+      let average = (num1 + num2) / 2;
+      let randomNumber = Math.floor(Math.random() * (400 - 50 + 1)) + 50;
+
+      let message = "";
+      if (average > randomNumber) {
+        message = "Your average (" + average + ") is GREATER than system number (" + randomNumber + ")";
+      } else if (average < randomNumber) {
+        message = "Your average (" + average + ") is LESS than system number (" + randomNumber + ")";
+      } else {
+        message = "Your average is EQUAL to system number (" + randomNumber + ")";
+      }
+
+      document.getElementById("resultBox").value = message;
+    }
+  </script>
 </head>
 
 <body>
-  <h1>CSCI 165 Assignment #2</h1>
 
-  <h2>Section 1</h2>
+  <!-- SECTION 1 -->
+  <div id="section1">
+    <h1>Section 1</h1>
 
-  <ul style="list-style-type:square;">
-    <li>Level 1
-      <ol type="i">
-        <li>Level 2
-          <ol type="a">
-            <li>Level 3</li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-  </ul>
+    <p>This is my webpage for Assignment 2</p>
 
-  <video width="560" controls>
-  <source src="https://arshdeepsohi.infinityfree.me/JUPITER1.mp4?i=1" type="video/mp4">
-</video>
+    <ul style="list-style-type:square;">
+      <li>Planets
+        <ol type="i">
+          <li>Jupiter
+            <ol type="a">
+              <li>Largest Planet</li>
+              <li>Gas Giant</li>
+            </ol>
+          </li>
+          <li>Mars</li>
+        </ol>
+      </li>
+    </ul>
 
-  <p><a href="#section2">Go to Section 2</a></p>
+    <h3>Video about Jupiter</h3>
+    <video width="560" height="315" controls>
+      <source src="JUPITER1.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <br><br>
+    <a href="#section2">Go to Section 2</a>
+  </div>
 
   <hr>
 
-  <h2 id="section2">Section 2</h2>
+  <!-- SECTION 2 -->
+  <div id="section2">
+    <h1>Section 2</h1>
 
-  <img id="pic" src="FISH.jpg" alt="Selected image" width="260">
+    <label><input type="radio" name="image" onclick="changeImage('myphoto.jpg')"> My Photo</label>
+    <label><input type="radio" name="image" onclick="changeImage('BIRD.jpg')"> Bird</label>
+    <label><input type="radio" name="image" onclick="changeImage('FISH.jpg')" checked> Fish</label>
 
-  <div>
-    <label><input type="radio" name="img" value="myphoto.jpg"> Image of yourself</label><br>
-    <label><input type="radio" name="img" value="BIRD.jpg"> Bird</label><br>
-    <label><input type="radio" name="img" value="FISH.jpg" checked> Fish</label>
+    <br><br>
+
+    <img id="displayImage" src="FISH.jpg" width="300" height="250" alt="Selected image">
   </div>
 
-  <h2>Section 3</h2>
+  <!-- SECTION 3 -->
+  <h1>Section 3</h1>
+  <button onclick="calculateAverage()">Click to Enter Numbers</button>
+  <br><br>
+  <input type="text" id="resultBox" size="80">
 
-  <label>Number 1 (20–350): <input id="n1" type="number" min="20" max="350"></label><br><br>
-  <label>Number 2 (20–350): <input id="n2" type="number" min="20" max="350"></label><br><br>
-  <button type="button" onclick="check()">Submit</button><br><br>
-
-  <textarea id="msg" readonly rows="4" cols="55"></textarea>
-
-  <script>
-    const radios = document.querySelectorAll('input[name="img"]');
-    const pic = document.getElementById('pic');
-    radios.forEach(r => r.addEventListener('change', () => pic.src = r.value));
-
-    function check(){
-      const a = Number(document.getElementById('n1').value);
-      const b = Number(document.getElementById('n2').value);
-      const msg = document.getElementById('msg');
-
-      if(!Number.isFinite(a) || !Number.isFinite(b)){
-        msg.value = "Enter both numbers.";
-        return;
-      }
-      if(a < 20 || a > 350 || b < 20 || b > 350){
-        msg.value = "Each number must be between 20 and 350.";
-        return;
-      }
-
-      const avg = (a + b) / 2;
-      const rand = Math.floor(Math.random() * (400 - 50 + 1)) + 50;
-
-      if(avg > rand) msg.value = `Average=${avg}\nRandom=${rand}\nAverage is GREATER than random.`;
-      else if(avg < rand) msg.value = `Average=${avg}\nRandom=${rand}\nAverage is LESS than random.`;
-      else msg.value = `Average=${avg}\nRandom=${rand}\nAverage is EQUAL to random.`;
-    }
-  </script>
 </body>
 </html>
