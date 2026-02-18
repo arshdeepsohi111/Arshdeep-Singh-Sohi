@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Assign2</title>
+
+  <style>
+    body{
+      margin:20px;
+      background-image:url("ARSH.jpg");
+      background-size:cover;
+      background-repeat:no-repeat;
+      background-attachment:fixed;
+      font-family:Arial, sans-serif;
+    }
+
+    h1{ color:green; }
+
+    p{
+      background-color:lightblue;
+      font-family:Algerian, serif;
+      font-size:45px;
+      padding:8px;
+    }
+
+    hr{
+      width:60%;
+      height:30px;
+      background-color:lightgreen;
+      border:none;
+      margin:20px 0;
+    }
+
+    #section2{
+      background-image:url("SKYTRAIN.jpg");
+      background-size:cover;
+      background-repeat:no-repeat;
+      padding:15px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>CSCI 165 Assignment #2</h1>
+
+  <h2>Section 1</h2>
+
+  <ul style="list-style-type:square;">
+    <li>Level 1
+      <ol type="i">
+        <li>Level 2
+          <ol type="a">
+            <li>Level 3</li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ul>
+
+  <video width="560" controls>
+  <source src="https://arshdeepsohi.infinityfree.me/JUPITER1.mp4?i=1" type="video/mp4">
+</video>
+
+  <p><a href="#section2">Go to Section 2</a></p>
+
+  <hr>
+
+  <h2 id="section2">Section 2</h2>
+
+  <img id="pic" src="FISH.jpg" alt="Selected image" width="260">
+
+  <div>
+    <label><input type="radio" name="img" value="myphoto.jpg"> Image of yourself</label><br>
+    <label><input type="radio" name="img" value="BIRD.jpg"> Bird</label><br>
+    <label><input type="radio" name="img" value="FISH.jpg" checked> Fish</label>
+  </div>
+
+  <h2>Section 3</h2>
+
+  <label>Number 1 (20–350): <input id="n1" type="number" min="20" max="350"></label><br><br>
+  <label>Number 2 (20–350): <input id="n2" type="number" min="20" max="350"></label><br><br>
+  <button type="button" onclick="check()">Submit</button><br><br>
+
+  <textarea id="msg" readonly rows="4" cols="55"></textarea>
+
+  <script>
+    const radios = document.querySelectorAll('input[name="img"]');
+    const pic = document.getElementById('pic');
+    radios.forEach(r => r.addEventListener('change', () => pic.src = r.value));
+
+    function check(){
+      const a = Number(document.getElementById('n1').value);
+      const b = Number(document.getElementById('n2').value);
+      const msg = document.getElementById('msg');
+
+      if(!Number.isFinite(a) || !Number.isFinite(b)){
+        msg.value = "Enter both numbers.";
+        return;
+      }
+      if(a < 20 || a > 350 || b < 20 || b > 350){
+        msg.value = "Each number must be between 20 and 350.";
+        return;
+      }
+
+      const avg = (a + b) / 2;
+      const rand = Math.floor(Math.random() * (400 - 50 + 1)) + 50;
+
+      if(avg > rand) msg.value = `Average=${avg}\nRandom=${rand}\nAverage is GREATER than random.`;
+      else if(avg < rand) msg.value = `Average=${avg}\nRandom=${rand}\nAverage is LESS than random.`;
+      else msg.value = `Average=${avg}\nRandom=${rand}\nAverage is EQUAL to random.`;
+    }
+  </script>
+</body>
+</html>
