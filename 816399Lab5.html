@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CSCI165 Lab5 - Task 1</title>
+
+<style>
+
+body{
+    background-image:url("ARSH.jpg");
+    background-size:cover;
+    font-family:Arial, sans-serif;
+}
+
+#formbox{
+    width:480px;
+    margin:60px auto;
+    padding:20px;
+    border:3px solid black;
+    background:#eeeeee;
+}
+
+input[type="text"]{
+    height:30px;
+    font-size:18px;
+    text-align:center;
+}
+
+#guess{ width:90px; }
+#random{ width:90px; }
+#result{
+    width:260px;
+    background:white;
+    font-weight:bold;
+}
+
+button{
+    padding:8px 20px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+</style>
+
+<script>
+
+function runGame(){
+
+    let guess = Number(document.getElementById("guess").value);
+    let resultBox = document.getElementById("result");
+    if(isNaN(guess) || guess < 10 || guess > 85){
+        resultBox.value = "Enter number between 10 and 85";
+        return;
+    }
+    let randomNum = Math.floor(Math.random()*(85-10+1))+10;
+    document.getElementById("random").value = randomNum;
+    if(randomNum > guess){
+        resultBox.value = "--- Over your guess number ---";
+    }
+    else if(randomNum < guess){
+        resultBox.value = "--- Below your guess number ---";
+    }
+    else{
+        resultBox.value = "--- the same ---";
+    }
+}
+
+</script>
+
+</head>
+
+<body>
+
+<div id="formbox">
+
+<h3>Form 5-1</h3>
+
+Enter your guess number here:
+<input type="text" id="guess">
+
+<br><br>
+
+Generate any random number from:
+<input type="text" id="random" readonly>
+
+<br><br>
+
+<button onclick="runGame()">RUN</button>
+
+<input type="text" id="result" readonly>
+
+</div>
+
+</body>
+</html>
